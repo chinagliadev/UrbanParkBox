@@ -1,0 +1,20 @@
+{
+  "name": "sistemadeestacionamento",
+  "version": "1.0.0",
+  "description": "Sistema de gerenciamento de carro para estacionamento",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Victor Chinaglia",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "express": "^5.2.1",
+    "express-handlebars": "^8.0.3",
+    "mysql2": "^3.16.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}

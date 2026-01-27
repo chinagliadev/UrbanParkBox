@@ -1,0 +1,226 @@
+@font-face {
+    font-family: 'Nunito';
+    src: url('/fonts/Nunito-VariableFont_wght.ttf');
+}
+
+
+:root {
+    --header-color: #1f1e24;
+    --text-color: #17161B;
+    --menu-color: #363640;
+    --bagde-ativos: #363640;
+    --subtitle-2-color: #a1a1a1;
+    --header-3: 32px;
+    --header-4: 24px;
+    --header-6: 16px;
+    --subtile-2: 16px;
+    --subtile-color: #faf9f9;
+    --button2-font: 16px;
+    --body-color: #FAF9F9;
+    --Header-6-Medium: 16px;
+    --font-input: #F5F0F0;
+}
+
+.header-4 {
+    font-size: var(--header-4);
+    font-weight: 400;
+}
+
+.subtitle-2 {
+    font-size: 16px;
+    color: #000000;
+}
+
+body {
+    font-family: 'Nunito';
+    background-color: var(--body-color);
+}
+
+.header {
+    background-color: var(--header-color);
+    min-height: 80px;
+}
+
+.header h1 {
+    font-size: var(--header-3);
+    color: #ffffff;
+    font-weight: 300;
+}
+
+.header p {
+    font-size: var(--subtile-2);
+    color: var(--subtile-color);
+    font-weight: 400;
+    color: var(--subtile-color);
+}
+
+.espacamento-24px {
+    gap: 24px;
+}
+
+.header .textos-header {
+    line-height: 0px;
+}
+
+.card-status {
+    height: 160px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0px 0px 12px -7px #000000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.card-status:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 0px 12px -10px #000000;
+}
+
+.card-status h2 {
+    font-size: var(--header-6);
+    font-weight: 500;
+}
+
+.card-status .card-status-body h1 {
+    font-size: 56px;
+    font-weight: 300 bold;
+}
+
+.menu-opcoes {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 12px -7px #000000;
+    border-radius: 16px;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+}
+
+.menu-opcoes .lista-menu-opcoes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-opcoes .lista-menu-opcoes .item-lista {
+    text-align: center;
+    width: 100%;
+    border-radius: 24px;
+    padding: 16px 0px;
+    cursor: pointer;
+}
+
+.active {
+    background-color: var(--menu-color);
+    color: #ffffff;
+}
+
+.mt-16 {
+    margin-top: 16px;
+}
+
+.registrar-entrada {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formulario {
+    background-color: #ffffff;
+    max-width: 564px;
+    max-width: 568px;
+    width: 100%;
+    box-shadow: 0px 0px 12px -7px #000000;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.formulario .subtitulo-formulario {
+    font-size: var(--subtile-2);
+    color: var(--subtitle-2-color);
+}
+
+.formulario .caixa-radio {
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-opcoes{
+    display: flex;
+    gap: 16px;
+}
+
+.input-formulario{
+    height: 53px;
+    border-radius: 8px;
+    background-color: #F8F8F8;
+    border: none;
+    padding: 16px;
+}
+
+.input-formulario::-webkit-input-placeholder{
+    font-size: var(--button2-font);
+}
+
+input[type="radio"] {
+  accent-color: #000000;
+}
+
+.btn-registrar-entrada{
+    width: 100%;
+    height: 44.41px;
+    background-color: #1f1e24;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    transition: 0.2s;
+}
+
+.btn-registrar-entrada:hover{
+    background-color: var(--menu-color);
+    transition: 0.2s;
+}
+
+.section-estacionamento {
+  display: none;
+}
+
+.section-estacionamento.active-section {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.veiculos_ativos{
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 12px -7px #000000;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.cabecalho_veiculos_ativos h3,
+.cabecalho_veiculos_ativos p {
+  margin: 0;
+}
+
+.veiculos_ativos h3{
+    font-size: var(--header-3);
+    font-weight: 300;
+}
+
+.veiculos_ativos .bagde-ativos{
+    background-color: var(--header-color);
+    color: #ffffff;
+    text-align: center;
+    padding: 4px;
+    width: 139px;
+    border-radius: 16px;
+}
