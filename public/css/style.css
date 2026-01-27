@@ -189,21 +189,24 @@ input[type="radio"] {
 }
 
 .section-estacionamento {
-  display: none;
+  display: none !important;
 }
 
 .section-estacionamento.active-section {
-  display: flex;
-  justify-content: center;
-  align-items: center; 
+  display: flex !important;
+  flex-direction: column;
 }
 
-.veiculos_ativos{
+.veiculos_ativos {
     width: 100%;
     background-color: #ffffff;
     box-shadow: 0px 0px 12px -7px #000000;
     border-radius: 16px;
-    padding: 24px;
+  padding: 24px 32px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px; 
 }
 
 .cabecalho_veiculos_ativos h3,
@@ -223,4 +226,73 @@ input[type="radio"] {
     padding: 4px;
     width: 139px;
     border-radius: 16px;
+}
+
+.veiculos_momentos{
+    width: 100%;
+}
+
+.veiculos_ativos ul{
+    padding: 0;
+    list-style-type: none;
+}
+
+.veiculos_ativos ul .li-ativo{
+    border: 3px solid var(--font-input);
+    height: 195px;
+    border-radius: 8px;
+    padding: 24px;
+}
+
+.header-item h3{
+    font-size: var(--header-4);
+    font-weight: 400;
+}
+
+.header-item{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header-item .ticket_veiculo {
+    width: 55px;
+    height: 28px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.ticket_veiculo.btn_ver_ticket {
+    background-color: #F93B3B;
+    color: #fff;
+}
+
+.ticket_veiculo.btn_ver_ticket:hover {
+    background-color: #d30000;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.ticket_veiculo.btn_remover_veiculo {
+    background-color: var(--menu-color);
+}
+
+.ticket_veiculo.btn_remover_veiculo:hover {
+    background-color: #17161B;
+    transition: 0.3s;
+}
+
+.grupo_acoes{
+    display: flex;
+    gap: 16px;
+}
+
+.descricao_carro .lista_descricao_carro{
+    list-style-type: none;
+    padding: 0;
+}
+
+.lista_descricao_carro span{
+    font-weight: 600;
 }

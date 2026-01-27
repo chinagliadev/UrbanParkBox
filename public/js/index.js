@@ -1,18 +1,17 @@
-const itensDaLista = document.querySelectorAll('.item-lista')
-const sectionEstacionamento = document.querySelectorAll('.section-estacionamento')
+const itensMenu = document.querySelectorAll('.item-lista')
+const sections = document.querySelectorAll('.section-estacionamento')
 
-itensDaLista.forEach((item, index) => {
-  item.addEventListener('click', e => {
-    e.preventDefault()
+itensMenu.forEach((item, index) => {
+  item.addEventListener('click', () => {
 
-    itensDaLista.forEach(i => i.classList.remove('active'))
+    itensMenu.forEach(i => i.classList.remove('active'))
 
-    sectionEstacionamento.forEach(section =>
+    sections.forEach(section =>
       section.classList.remove('active-section')
     )
 
     item.classList.add('active')
 
-    sectionEstacionamento[index].classList.add('active-section')
+    sections[index].classList.add('active-section')
   })
 })

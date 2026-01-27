@@ -65,18 +65,48 @@
         </section>
 
         <section class="veiculos_ativos section-estacionamento active-section mt-16">
-            <header
-                class="cabecalho_veiculos_ativos w-100 d-flex align-items-center justify-content-between">
-                <h3 class="titulo-veiculos-ativos">Veículos Ativos</h3>
+            <header class="cabecalho_veiculos_ativos w-100 d-flex align-items-center justify-content-between">
+                <h3 class="titulo-veiculos-ativos">Veículos Estacionados</h3>
                 <p class="bagde-ativos"><span>0</span> Ativos</p>
             </header>
+
+            <div class="veiculos_momentos">
+                <ul class="lista_veiculos_ativos">
+                    <li class="li-ativo mt-16">
+                        <div class="item_ativo">
+                            <div class="header-item">
+                                <h3><img src="/img/Icone_carro_ativo.png" alt="icone para o titulo de carro ativo" class="me-2"> ENH-6415</h3>
+
+                                <div class="grupo_acoes">
+                                    <button class="ticket_veiculo btn_ver_ticket"><img src="/img/icon-deletar-carro.png"
+                                            alt="icone para deletar o carro"></button>
+                                    <button class="ticket_veiculo btn_remover_veiculo"><img src="/img/Ticket.png"
+                                            alt="icone ticket para o botao"></button>
+                                </div>
+
+                            </div>
+                                <div class="descricao_carro">
+                                    <ul class="lista_descricao_carro">
+                                        <li>Modelo: <span>Honda Civic</span></li>
+                                        <li>Cor: <span>Preta</span></li>
+                                        <li>Vaga: <span>#10</span></li>
+                                        <li>Entrada: <span>23/01/2026, 01:09</span></li>
+                                        <li>Tempo: <span>0 Min</span></li>
+                                    </ul>
+                                </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section-estacionamento mt-16">
+            <h3>Gerenciamento de Vagas</h3>
+            <div class="alert alert-info">Aqui vou gerenciar as vagas</div>
         </section>
 
 
-        <section class="section-estacionamento">
-        </section>
-
-        <section class="registrar-entrada mt-16 section-estacionamento">
+        <section class="registrar-entrada  mt-16 section-estacionamento">
             <form class="formulario" action="" method="POST">
                 <div class="caixa-titulo">
                     <h4 class="titulo-formulario header-4">Registrar Entrada</h4>
@@ -155,9 +185,8 @@
 
         <section class="section-estacionamento">
             <h1>Historico</h1>
+            <div class="alert alert-warning">Gerenciar Historico</div>
         </section>
-
-
 
     </div>
 
