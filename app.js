@@ -22,15 +22,21 @@ app.get('/', (req, res) => {
   res.render('home')
 })
 
+app.get('/:situacao', (req, req)=>{
+
+})
+
 app.post('/registrarEntrada', (req, res) => {
 
   const { tipo_veiculo, vagas_disponivel, placa, modelo, cor } = req.body;
 
-  console.log(tipo_veiculo);
-  console.log(vagas_disponivel);
-  console.log(placa);
-  console.log(modelo);
-  console.log(cor);
+  if(tipo_veiculo === '' || placa === '' || modelo === '' || cor === ''){
+    res.redirect('/erro')    
+  }
+
+  const SQL = "INSERT INTO "
+
+  // conexao.query()
 
   res.send('Entrada registrada');
 });
