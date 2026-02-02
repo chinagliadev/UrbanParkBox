@@ -380,3 +380,34 @@ input[type="radio"] {
     width: 50px;
     text-align: center;
 }
+
+.modal .modal-header{
+    background-color: var(--header-color);
+    color: var(--body-color);
+    font-size: var(--header-4);
+}
+
+.modal .btn-liberar-veiculo-modal{
+    background-color: #14a800;
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 8px;
+    border: none;
+    transition: 0.3s;
+}
+
+.modal .btn-liberar-veiculo-modal:hover{
+    background-color: #0c6b00;
+    transition: 0.3s;
+}
+
+.modal .modal-body-desc-veiculo{
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.modal .modal-body-desc-veiculo .lista-carro-modal{
+    padding: 0;
+    list-style: none;
+}

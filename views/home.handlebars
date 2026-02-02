@@ -67,7 +67,7 @@
 
 
         {{#if sucesso}}
-            <div class="alert alert-success fw-semibold">
+            <div id="alert_mensagem" class="alert alert-success mt-3">
                 Veículo cadastrado com sucesso
             </div>
         {{/if}}
@@ -82,6 +82,7 @@
             <div class="veiculos_momentos">
                 <ul class="lista_veiculos_ativos">
                     {{#each veiculos_estacionados}}
+                    
                     <li class="li-ativo mt-16">
                         <div class="item_ativo">
                             <div class="header-item">
@@ -96,8 +97,19 @@
                                 </h3>
 
                                 <div class="grupo_acoes">
-                                    <button data-bs-toggle="modal" data-bs-target="#modal-liberar-veiculo" class="ticket_veiculo btn_liberar_veiculo"><img src="/img/icone-car-liberar.png"
-                                            alt="icone para liberar o carro"></button>
+                                    <button data-bs-toggle="modal" 
+                                            data-bs-target="#modal-liberar-veiculo" 
+                                            data-id="{{this.estacionamento_id}}"
+                                            data-idVaga="{{this.vaga_id}}"
+                                            data-idVeiculo="{{this.veiculo_id}}"
+                                            data-modelo="{{modelo}}" 
+                                            data-cor="{{cor}}" 
+                                            data-vaga="{{numero}}" 
+                                            data-entrada="{{entrada}}" 
+                                            data-tempo="{{tempo}}" 
+                                            class="ticket_veiculo btn_liberar_veiculo"><img src="/img/icone-car-liberar.png"
+                                            alt="icone para liberar o carro">
+                                    </button>
                                     <button class="ticket_veiculo btn_ver_ticket"><img src="/img/Ticket.png"
                                             alt="icone ticket para o botao"></button>
                                 </div>

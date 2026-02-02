@@ -27,6 +27,10 @@ app.get('/', async (req, res) => {
   try {
     const SQLVAGASDISPONIVEIS = "SELECT * FROM vagas WHERE status = 'disponivel'";
     const SQLLISTARVEICULOS = `SELECT 
+     estacionamento.id AS estacionamento_id,
+     vagas.id AS vaga_id,
+     veiculos.id AS veiculo_id,
+     veiculos.status AS veiculos_status,
   DATE_FORMAT(estacionamento.entrada, '%d/%m/%Y %H:%i') AS entrada,
   veiculos.modelo,
   veiculos.placa,
@@ -36,7 +40,8 @@ app.get('/', async (req, res) => {
   vagas.setor
   FROM estacionamento
   INNER JOIN veiculos ON estacionamento.veiculo_id = veiculos.id
-  INNER JOIN vagas ON estacionamento.vaga_id = vagas.id;`
+  INNER JOIN vagas ON estacionamento.vaga_id = vagas.id
+  WHERE veiculos.status = 'ativo';`
 
     const [vagas] = await conexao.query(SQLVAGASDISPONIVEIS);
     const [veiculos_estacionados] = await conexao.query(SQLLISTARVEICULOS)
@@ -122,16 +127,40 @@ app.post('/', async (req, res) => {
   }
 });
 
-app.patch('/:id', async(req, res)=>{
-  const id = req.params.id
+app.post('/liberar_veiculo', async (req, res) => {
+  const { veiculo_id, vaga_id, estacionamento_id } = req.body;
 
-  if(!id){
-    return res.redirect('/')
+  if (!veiculo_id || !vaga_id || !estacionamento_id) {
+    return res.redirect('/');
   }
 
-  
+  const SQLUPDATEVEICULO = `
+  UPDATE veiculos
+  SET status = 'finalizado',
+      data_saida = NOW()
+  WHERE id = ?
+  `;
 
-})
+
+  const SQLUPDATEVAGA = `
+    UPDATE vagas 
+    SET status = 'disponivel' 
+    WHERE id = ?
+  `;
+
+  const SQLUPDATEESTACIONAMENTO = `
+    UPDATE estacionamento
+    SET saida = NOW()
+    WHERE id = ?;
+  `;
+
+  await conexao.query(SQLUPDATEVEICULO, [veiculo_id]);
+  await conexao.query(SQLUPDATEVAGA, [vaga_id]);
+  await conexao.query(SQLUPDATEESTACIONAMENTO, [estacionamento_id]);
+
+  return res.redirect('/');
+});
+
 
 
 app.listen(3000, () => {
