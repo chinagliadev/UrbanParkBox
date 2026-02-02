@@ -9,8 +9,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.engine('handlebars', engine({
-  partialsDir: './views/partials'
-}))
+  defaultLayout: 'main',
+  partialsDir: './views/partials',
+  helpers: {
+    eq: (a, b) => a === b
+  }
+}));
 
 app.set('view engine', 'handlebars')
 app.set('views', './views')
@@ -30,9 +34,9 @@ app.get('/', async (req, res) => {
   veiculos.tipo,
   vagas.numero,
   vagas.setor
-FROM estacionamento
-INNER JOIN veiculos ON estacionamento.veiculo_id = veiculos.id
-INNER JOIN vagas ON estacionamento.vaga_id = vagas.id;`
+  FROM estacionamento
+  INNER JOIN veiculos ON estacionamento.veiculo_id = veiculos.id
+  INNER JOIN vagas ON estacionamento.vaga_id = vagas.id;`
 
     const [vagas] = await conexao.query(SQLVAGASDISPONIVEIS);
     const [veiculos_estacionados] = await conexao.query(SQLLISTARVEICULOS)

@@ -85,8 +85,15 @@
                     <li class="li-ativo mt-16">
                         <div class="item_ativo">
                             <div class="header-item">
-                                <h3><img src="/img/Icone_carro_ativo.png" alt="icone para o titulo de carro ativo"
-                                        class="me-2">{{placa}} </h3>
+                                <h3>
+                                    {{#if (eq tipo "moto")}}
+                                    <img src="/img/icone_moto.png" alt="icone para o titulo de carro ativo"
+                                        class="me-2">{{placa}}
+                                    {{else}}
+                                    <img src="/img/Icone_carro_ativo.png" alt="icone para o titulo de carro ativo"
+                                        class="me-2">{{placa}}
+                                    {{/if}} 
+                                </h3>
 
                                 <div class="grupo_acoes">
                                     <button class="ticket_veiculo btn_ver_ticket"><img src="/img/icon-deletar-carro.png"
