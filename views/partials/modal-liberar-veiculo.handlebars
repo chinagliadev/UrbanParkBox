@@ -1,0 +1,36 @@
+<div id="modal-liberar-veiculo" data-bs-backdrop="static" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-body text-start">
+        <h3 class="fw-semibold fs-4">Deseja liberar o veiculo ?</h3>
+        <p class="text-muted">Isso encerrará a permanência dele e liberará a vaga para outro
+          carro.</p>
+
+        <form action="/liberar_veiculo" method="POST">
+          <input type="hidden" id="idVeiculo" name="veiculo_id">
+          <input type="hidden" id="idVaga" name="vaga_id">
+          <input type="hidden" id="idEstacionamento" name="estacionamento_id">
+
+          <div class="modal-body-desc-veiculo">
+            <p class="fw-semibold">Descrição do Veiculo</p>
+
+            <ul class="lista-carro-modal">
+              <li>Modelo: <span class="fw-semibold" id="modelo-modal"></span></li>
+              <li>Cor: <span class="fw-semibold" id="cor-modal"></span></li>
+              <li>Vaga: <span class="fw-semibold" id="vaga-modal"></span></li>
+              <li>Entrada: <span class="fw-semibold" id="entrada-modal"></span></li>
+              <li>Tempo: <span class="fw-semibold" id="tempo-modal"></span></li>
+              <li>Valor: <span class="fw-semibold text-success" id="valor-modal"></span></li>
+            </ul>
+          </div>
+      </div>
+
+      <div class="modal-footer d-flex justify-content-between">
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn-liberar-veiculo-modal">Liberar Veiculo</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>

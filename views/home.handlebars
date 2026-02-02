@@ -67,9 +67,9 @@
 
 
         {{#if sucesso}}
-            <div class="alert alert-success fw-semibold">
-                Veículo cadastrado com sucesso
-            </div>
+        <div id="alert_mensagem" class="alert alert-success mt-3">
+            Veículo cadastrado com sucesso
+        </div>
         {{/if}}
 
         <section class="veiculos_ativos section-estacionamento active-section mt-16">
@@ -79,9 +79,12 @@
                 <p class="bagde-ativos"><span>{{veiculos_estacionados.length}}</span> Ativos</p>
             </header>
 
+
             <div class="veiculos_momentos">
                 <ul class="lista_veiculos_ativos">
-                    {{#each veiculos_estacionados}}
+        {{#each veiculos_estacionados}}
+
+
                     <li class="li-ativo mt-16">
                         <div class="item_ativo">
                             <div class="header-item">
@@ -92,13 +95,18 @@
                                     {{else}}
                                     <img src="/img/Icone_carro_ativo.png" alt="icone para o titulo de carro ativo"
                                         class="me-2">{{placa}}
-                                    {{/if}} 
+                                    {{/if}}
                                 </h3>
 
                                 <div class="grupo_acoes">
-                                    <button class="ticket_veiculo btn_ver_ticket"><img src="/img/icon-deletar-carro.png"
-                                            alt="icone para deletar o carro"></button>
-                                    <button class="ticket_veiculo btn_remover_veiculo"><img src="/img/Ticket.png"
+                                    <button data-bs-toggle="modal" data-bs-target="#modal-liberar-veiculo"
+                                        data-id="{{this.estacionamento_id}}" data-idVaga="{{this.vaga_id}}"
+                                        data-idVeiculo="{{this.veiculo_id}}" data-modelo="{{modelo}}" data-cor="{{cor}}"
+                                        data-vaga="{{numero}}" data-entrada="{{entrada}}" data-tempo="{{tempo}}"
+                                        class="ticket_veiculo btn_liberar_veiculo"><img src="/img/icone-car-liberar.png"
+                                            alt="icone para liberar o carro">
+                                    </button>
+                                    <button class="ticket_veiculo btn_ver_ticket"><img src="/img/Ticket.png"
                                             alt="icone ticket para o botao"></button>
                                 </div>
 
@@ -108,11 +116,17 @@
                                     <li>Modelo: <span>{{modelo}}</span></li>
                                     <li>Cor: <span>{{cor}}</span></li>
                                     <li>Vaga: <span>{{numero}}</span></li>
-                                    <li>Entrada: <span>{{entrada}}</span></li>
-                                    <li>Tempo: <span>0 Min</span></li>
+                                    <li>Entrada: <span id="entrada">{{entrada}}</span></li>
+                                    <li>Tempo: <span id="tempo">0 Min</span></li>
                                 </ul>
                             </div>
                         </div>
+                    </li>
+
+                    {{else}}
+                    <li class="list-unstyled text-center">
+                        <img width="330" class="img-fluid" src="/img/Parking-bro.png" alt="Estacionamento">
+                        <p class="fs-4">O estacionamento está vazio. Que tal registrar a primeira entrada?</p>
                     </li>
                     {{/each}}
                 </ul>
@@ -404,5 +418,6 @@
 
     </div>
 
+    {{> modal-liberar-veiculo}}
 
 </main>
