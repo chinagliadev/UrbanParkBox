@@ -115,6 +115,13 @@ body {
     border-radius: 24px;
     padding: 16px 0px;
     cursor: pointer;
+    transition: 0.2s;
+}
+
+.item-lista:hover{
+    background-color: var(--menu-color);
+    transition: 0.2s;
+    color: #ffffff;
 }
 
 .active {

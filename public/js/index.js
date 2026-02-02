@@ -107,9 +107,15 @@ const tempo = document.getElementById('tempo');
 const entrada = document.getElementById('entrada');
 
 if (tempo && entrada) {
-  const tempoEstacionado = entrada.textContent;
-  const tempoEmMinuto = calcularTempoEmMinutos(tempoEstacionado);
-  const tempoFormatado = formatarTempo(tempoEmMinuto);
+  function atualizarTempo() {
+    const tempoEstacionado = entrada.textContent;
+    const tempoEmMinuto = calcularTempoEmMinutos(tempoEstacionado);
+    const tempoFormatado = formatarTempo(tempoEmMinuto);
 
-  tempo.textContent = tempoFormatado;
+    tempo.textContent = tempoFormatado;
+  }
+
+  atualizarTempo(); 
+
+  setInterval(atualizarTempo, 60000);
 }
