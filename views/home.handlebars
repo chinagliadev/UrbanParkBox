@@ -64,7 +64,16 @@
             </ul>
         </section>
 
+
+
+        {{#if sucesso}}
+            <div class="alert alert-success fw-semibold">
+                Veículo cadastrado com sucesso
+            </div>
+        {{/if}}
+
         <section class="veiculos_ativos section-estacionamento active-section mt-16">
+
             <header class="cabecalho_veiculos_ativos w-100 d-flex align-items-center justify-content-between">
                 <h3 class="titulo-veiculos-ativos">Veículos Estacionados</h3>
                 <p class="bagde-ativos"><span>0</span> Ativos</p>
@@ -332,7 +341,7 @@
                             </option>
 
                             {{#each vagas}}
-                            <option name="vagas_disponivel" value="{{id}}">
+                            <option value="{{id}}">
                                 Vaga {{numero}}
                             </option>
                             {{/each}}

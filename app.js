@@ -26,6 +26,7 @@ app.get('/', async (req, res) => {
 
     res.render('home', {
       vagas,
+      sucesso: req.query.sucesso === '1',
       erro: null
     });
 
@@ -40,36 +41,45 @@ app.get('/', async (req, res) => {
 });
 
 app.post('/', async (req, res) => {
-  const { tipo_veiculo, vagas_disponivel, placa, modelo, cor } = req.body;
+  const { tipo_veiculo, vaga_disponivel, placa, modelo, cor } = req.body;
   const status = 'ativo';
 
   if (!tipo_veiculo || !placa || !modelo || !cor) {
     return res.redirect('/erro');
   }
 
+  const SQLVEICULO = `
+    INSERT INTO veiculos (tipo, placa, modelo, cor, status)
+    VALUES (?, ?, ?, ?, ?)
+  `;
+
+  const SQLVAGAALEATORIA = `
+    SELECT id FROM vagas WHERE status = 'disponivel' LIMIT 1
+  `;
+
+  const SQLUPDATEVAGA = `
+    UPDATE vagas SET status = 'ocupado' WHERE id = ?
+  `;
+
+  const SQLESTACIONAMENTO = `
+    INSERT INTO estacionamento (veiculo_id, vaga_id)
+    VALUES (?, ?)
+  `;
+
   try {
+    let vagaId = vaga_disponivel;
 
-    let vagaId = vagas_disponivel
-    if (vagaId === '') {
-      const SQLVAGAS = "SELECT * FROM vagas WHERE status = 'disponivel' LIMIT 1";
-      const [vagas] = await conexao.query(SQLVAGAS);
-      const vagaDisponivel = vagas[0];
-      const UPDATEVAGA = "UPDATE vagas SET status = 'ocupado' WHERE id = ?";
-      await conexao.query(UPDATEVAGA, [vagaDisponivel.id]);
+    if (!vagaId) {
+      const [vagas] = await conexao.query(SQLVAGAALEATORIA);
 
-      return  res.redirect('/');
+      if (vagas.length === 0) {
+        return res.redirect('/semVagas');
+      }
+
+      vagaId = vagas[0].id;
     }
 
-    const SQLVEICULO = `
-        INSERT INTO veiculos (tipo, placa, modelo, cor, status)
-        VALUES (?, ?, ?, ?, ?)
-      `;
-
-    const SQLVAGAS = `
-      UPDATE vagas SET status = 'ocupado' WHERE id = ?
-    `
-
-    await conexao.query(SQLVEICULO, [
+    const [resultadoVeiculo] = await conexao.query(SQLVEICULO, [
       tipo_veiculo,
       placa,
       modelo,
@@ -77,15 +87,23 @@ app.post('/', async (req, res) => {
       status,
     ]);
 
-    await conexao.query(SQLVAGAS, [vagas_disponivel])
+    const veiculoId = resultadoVeiculo.insertId;
 
-    res.redirect('/');
+    await conexao.query(SQLUPDATEVAGA, [vagaId]);
+
+    await conexao.query(SQLESTACIONAMENTO, [
+      veiculoId,
+      vagaId,
+    ]);
+
+    res.redirect('/?sucesso=1');
 
   } catch (err) {
     console.error(err);
     res.redirect('/erro');
   }
 });
+
 
 app.listen(3000, () => {
   console.log('Servidor rodando na porta 3000')
