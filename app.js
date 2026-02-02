@@ -122,6 +122,17 @@ app.post('/', async (req, res) => {
   }
 });
 
+app.patch('/:id', async(req, res)=>{
+  const id = req.params.id
+
+  if(!id){
+    return res.redirect('/')
+  }
+
+  
+
+})
+
 
 app.listen(3000, () => {
   console.log('Servidor rodando na porta 3000')

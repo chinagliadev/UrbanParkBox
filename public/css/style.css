@@ -19,6 +19,7 @@
     --body-color: #FAF9F9;
     --Header-6-Medium: 16px;
     --font-input: #F5F0F0;
+    --color-liberar: #14A800
 }
 
 .header-4 {
@@ -281,22 +282,24 @@ input[type="radio"] {
 }
 
 .ticket_veiculo.btn_ver_ticket {
-    background-color: #F93B3B;
-    color: #fff;
-}
-
-.ticket_veiculo.btn_ver_ticket:hover {
-    background-color: #d30000;
+    background-color: var(--menu-color);
     color: #fff;
     transition: 0.3s;
 }
 
-.ticket_veiculo.btn_remover_veiculo {
-    background-color: var(--menu-color);
+.ticket_veiculo.btn_ver_ticket:hover {
+    background-color: #141414;
+    color: #fff;
+    transition: 0.3s;
 }
 
-.ticket_veiculo.btn_remover_veiculo:hover {
-    background-color: #17161B;
+.ticket_veiculo.btn_liberar_veiculo {
+    background-color: var(--color-liberar);
+    transition: 0.3s;
+}
+
+.ticket_veiculo.btn_liberar_veiculo:hover {
+    background-color: #0c6b00;
     transition: 0.3s;
 }
 

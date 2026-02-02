@@ -15,3 +15,11 @@ itensMenu.forEach((item, index) => {
     sections[index].classList.add('active-section')
   })
 })
+
+const modal = document.getElementById('modal-liberar-veiculo')
+
+modal.addEventListener('shown.bs.modal', () => {
+  console.log('modal totalmente aberto')
+})
+
+console.log('oi')
