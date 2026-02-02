@@ -102,3 +102,14 @@ function esconderAlerta(id, tempo = 5000) {
     }, 300); 
   }, tempo);
 }
+
+const tempo = document.getElementById('tempo');
+const entrada = document.getElementById('entrada');
+
+if (tempo && entrada) {
+  const tempoEstacionado = entrada.textContent;
+  const tempoEmMinuto = calcularTempoEmMinutos(tempoEstacionado);
+  const tempoFormatado = formatarTempo(tempoEmMinuto);
+
+  tempo.textContent = tempoFormatado;
+}
