@@ -27,28 +27,37 @@ app.get('/', async (req, res) => {
   try {
     const SQLVAGASDISPONIVEIS = "SELECT * FROM vagas WHERE status = 'disponivel'";
     const SQLLISTARVEICULOS = `SELECT 
-     estacionamento.id AS estacionamento_id,
-     vagas.id AS vaga_id,
-     veiculos.id AS veiculo_id,
-     veiculos.status AS veiculos_status,
-  DATE_FORMAT(estacionamento.entrada, '%d/%m/%Y %H:%i') AS entrada,
-  veiculos.modelo,
-  veiculos.placa,
-  veiculos.cor,
-  veiculos.tipo,
-  vagas.numero,
-  vagas.setor
-  FROM estacionamento
-  INNER JOIN veiculos ON estacionamento.veiculo_id = veiculos.id
-  INNER JOIN vagas ON estacionamento.vaga_id = vagas.id
-  WHERE veiculos.status = 'ativo';`
+      estacionamento.id AS estacionamento_id,
+      vagas.id AS vaga_id,
+      veiculos.id AS veiculo_id,
+      veiculos.status AS veiculos_status,
+      DATE_FORMAT(estacionamento.entrada, '%d/%m/%Y %H:%i') AS entrada,
+      veiculos.modelo,
+      veiculos.placa,
+      veiculos.cor,
+      veiculos.tipo,
+      vagas.numero,
+      vagas.setor
+      FROM estacionamento
+      INNER JOIN veiculos ON estacionamento.veiculo_id = veiculos.id
+      INNER JOIN vagas ON estacionamento.vaga_id = vagas.id
+      WHERE veiculos.status = 'ativo';`
+
+    const SQLCONTAGEMVAGASDISPONIVEIS = `SELECT COUNT(*) AS total FROM vagas WHERE status = 'disponivel'
+`   
+
+    const SQLCONTAGEMVAGASOCUPADAS = `SELECT COUNT(*) AS totalOcupadas FROM vagas WHERE status = 'ocupado'`
 
     const [vagas] = await conexao.query(SQLVAGASDISPONIVEIS);
     const [veiculos_estacionados] = await conexao.query(SQLLISTARVEICULOS)
+    const [resultado] = await conexao.query(SQLCONTAGEMVAGASDISPONIVEIS)
+    const [resultadoOcupadas] = await conexao.query(SQLCONTAGEMVAGASOCUPADAS)
 
     res.render('home', {
       vagas,
       veiculos_estacionados,
+      vaga_disponiveis: resultado[0].total,
+      vagas_ocupadas: resultadoOcupadas[0].totalOcupadas,
       sucesso: req.query.sucesso === '1',
       erro: null
     });
