@@ -76,16 +76,17 @@
 
             <header class="cabecalho_veiculos_ativos w-100 d-flex align-items-center justify-content-between">
                 <h3 class="titulo-veiculos-ativos">Veículos Estacionados</h3>
-                <p class="bagde-ativos"><span>0</span> Ativos</p>
+                <p class="bagde-ativos"><span>{{veiculos_estacionados.length}}</span> Ativos</p>
             </header>
 
             <div class="veiculos_momentos">
                 <ul class="lista_veiculos_ativos">
+                    {{#each veiculos_estacionados}}
                     <li class="li-ativo mt-16">
                         <div class="item_ativo">
                             <div class="header-item">
                                 <h3><img src="/img/Icone_carro_ativo.png" alt="icone para o titulo de carro ativo"
-                                        class="me-2"> ENH-6415</h3>
+                                        class="me-2">{{placa}} </h3>
 
                                 <div class="grupo_acoes">
                                     <button class="ticket_veiculo btn_ver_ticket"><img src="/img/icon-deletar-carro.png"
@@ -97,15 +98,16 @@
                             </div>
                             <div class="descricao_carro">
                                 <ul class="lista_descricao_carro">
-                                    <li>Modelo: <span>Honda Civic</span></li>
-                                    <li>Cor: <span>Preta</span></li>
-                                    <li>Vaga: <span>#10</span></li>
-                                    <li>Entrada: <span>23/01/2026, 01:09</span></li>
+                                    <li>Modelo: <span>{{modelo}}</span></li>
+                                    <li>Cor: <span>{{cor}}</span></li>
+                                    <li>Vaga: <span>{{numero}}</span></li>
+                                    <li>Entrada: <span>{{entrada}}</span></li>
                                     <li>Tempo: <span>0 Min</span></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
+                    {{/each}}
                 </ul>
             </div>
         </section>

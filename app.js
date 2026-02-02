@@ -21,11 +21,25 @@ app.use(express.static('public'))
 
 app.get('/', async (req, res) => {
   try {
-    const SQL = "SELECT * FROM vagas WHERE status = 'disponivel'";
-    const [vagas] = await conexao.query(SQL);
+    const SQLVAGASDISPONIVEIS = "SELECT * FROM vagas WHERE status = 'disponivel'";
+    const SQLLISTARVEICULOS = `SELECT 
+  DATE_FORMAT(estacionamento.entrada, '%d/%m/%Y %H:%i') AS entrada,
+  veiculos.modelo,
+  veiculos.placa,
+  veiculos.cor,
+  veiculos.tipo,
+  vagas.numero,
+  vagas.setor
+FROM estacionamento
+INNER JOIN veiculos ON estacionamento.veiculo_id = veiculos.id
+INNER JOIN vagas ON estacionamento.vaga_id = vagas.id;`
+
+    const [vagas] = await conexao.query(SQLVAGASDISPONIVEIS);
+    const [veiculos_estacionados] = await conexao.query(SQLLISTARVEICULOS)
 
     res.render('home', {
       vagas,
+      veiculos_estacionados,
       sucesso: req.query.sucesso === '1',
       erro: null
     });
