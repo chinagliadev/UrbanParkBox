@@ -25,7 +25,11 @@ app.use(express.static('public'))
 
 app.get('/', async (req, res) => {
   try {
+
+    const SQLVAGAS = "SELECT * FROM vagas";
+
     const SQLVAGASDISPONIVEIS = "SELECT * FROM vagas WHERE status = 'disponivel'";
+
     const SQLLISTARVEICULOS = `SELECT 
       estacionamento.id AS estacionamento_id,
       vagas.id AS vaga_id,
@@ -43,7 +47,7 @@ app.get('/', async (req, res) => {
       INNER JOIN vagas ON estacionamento.vaga_id = vagas.id
       WHERE veiculos.status = 'ativo';`
 
-    const SQLCONTAGEMVAGASDISPONIVEIS = `SELECT COUNT(*) AS total FROM vagas WHERE status = 'disponivel'`   
+    const SQLCONTAGEMVAGASDISPONIVEIS = `SELECT COUNT(*) AS total FROM vagas WHERE status = 'disponivel'`
 
     const SQLCONTAGEMVAGASOCUPADAS = `SELECT COUNT(*) AS totalOcupadas FROM vagas WHERE status = 'ocupado'`
 
@@ -56,14 +60,25 @@ app.get('/', async (req, res) => {
     const [resultadoOcupadas] = await conexao.query(SQLCONTAGEMVAGASOCUPADAS)
     const [resultadoQuantidadeCarros] = await conexao.query(SQLCONTAGEMCARROS)
     const [resultadoQuantidadeMotos] = await conexao.query(SQLCONTAGEMMOTO)
+    const [vagasLista] = await conexao.query(SQLVAGAS)
+
+    const setores = {}; 
+
+    vagasLista.forEach(vaga => {
+      if (!setores[vaga.setor]) {
+        setores[vaga.setor] = []; 
+      }
+      setores[vaga.setor].push(vaga);
+    });
 
     res.render('home', {
       vagas,
+      setores,
       veiculos_estacionados,
       vaga_disponiveis: resultado[0].total,
       vagas_ocupadas: resultadoOcupadas[0].totalOcupadas,
       carro: resultadoQuantidadeCarros[0].totalCarros,
-      moto:resultadoQuantidadeMotos[0].totalMotos,
+      moto: resultadoQuantidadeMotos[0].totalMotos,
       sucesso: req.query.sucesso === '1',
       erro: null
     });

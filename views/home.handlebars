@@ -82,7 +82,7 @@
 
             <div class="veiculos_momentos">
                 <ul class="lista_veiculos_ativos">
-        {{#each veiculos_estacionados}}
+                    {{#each veiculos_estacionados}}
 
 
                     <li class="li-ativo mt-16">
@@ -134,200 +134,28 @@
         </section>
 
         <section class="section-estacionamento mt-16">
-            <div class="row mt-16">
-                <div class="col-12 col-md-6">
-                    <h3 class="titulo_vaga">Setor A</h3>
-
-                    <div class="row g-3">
-                        <div class="col-12 col-md-6">
-                            <div class="vaga_status disponivel">
-
-                                <div class="vaga">
-                                    <span>#1</span>
-                                </div>
-
-                                <p class="disponibilidade">Disponivel</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="vaga_status ocupado">
-
-                                <div class="vaga">
-                                    <span>#1</span>
-                                </div>
-
-                                <p>Ocupado</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="vaga_status ocupado">
-
-                                <div class="vaga">
-                                    <span>#1</span>
-                                </div>
-
-                                <p>Ocupado</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="vaga_status ocupado">
-
-                                <div class="vaga">
-                                    <span>#1</span>
-                                </div>
-
-                                <p>Ocupado</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <h3 class="titulo_vaga">Setor B</h3>
-
-                    <div class="row g-3">
-                        <div class="col-12 col-md-6">
-                            <div class="vaga_status disponivel">
-
-                                <div class="vaga">
-                                    <span>#1</span>
-                                </div>
-
-                                <p class="disponibilidade">Disponivel</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="vaga_status ocupado">
-
-                                <div class="vaga">
-                                    <span>#1</span>
-                                </div>
-
-                                <p>Ocupado</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="vaga_status ocupado">
-
-                                <div class="vaga">
-                                    <span>#1</span>
-                                </div>
-
-                                <p>Ocupado</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="vaga_status ocupado">
-
-                                <div class="vaga">
-                                    <span>#1</span>
-                                </div>
-
-                                <p>Ocupado</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <hr>
-
             <div class="row mt-16 mb-5">
-                <div class="col-12 col-md-6">
-                    <h3 class="titulo_vaga">Setor C</h3>
+                {{#each setores}}
+                <div class="col-12 col-md-6 mt-3">
+                    <h3 class="titulo_vaga">Setor {{@key}}</h3>
 
                     <div class="row g-3">
+                        {{#each this}}
                         <div class="col-12 col-md-6">
-                            <div class="vaga_status disponivel">
-
+                            <div class="vaga_status {{status}}">
                                 <div class="vaga">
-                                    <span>#1</span>
+                                    <span>#{{numero}}</span>
                                 </div>
-
-                                <p class="disponibilidade">Disponivel</p>
+                                <p>{{#if (eq status "disponivel")}}Disponível{{else}}Ocupado{{/if}}</p>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6">
-                            <div class="vaga_status ocupado">
-
-                                <div class="vaga">
-                                    <span>#1</span>
-                                </div>
-
-                                <p>Ocupado</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="vaga_status ocupado">
-
-                                <div class="vaga">
-                                    <span>#1</span>
-                                </div>
-
-                                <p>Ocupado</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="vaga_status ocupado">
-
-                                <div class="vaga">
-                                    <span>#1</span>
-                                </div>
-
-                                <p>Ocupado</p>
-                            </div>
-                        </div>
+                        {{/each}}
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
-                    <h3 class="titulo_vaga">Setor D</h3>
-
-                    <div class="row g-3">
-                        <div class="col-12 col-md-6">
-                            <div class="vaga_status disponivel">
-
-                                <div class="vaga">
-                                    <span>#1</span>
-                                </div>
-
-                                <p class="disponibilidade">Disponivel</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="vaga_status ocupado">
-
-                                <div class="vaga">
-                                    <span>#1</span>
-                                </div>
-
-                                <p>Ocupado</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="vaga_status ocupado">
-
-                                <div class="vaga">
-                                    <span>#1</span>
-                                </div>
-
-                                <p>Ocupado</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="vaga_status ocupado">
-
-                                <div class="vaga">
-                                    <span>#1</span>
-                                </div>
-
-                                <p>Ocupado</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                {{/each}}
             </div>
         </section>
+
 
         <section class="registrar-entrada  mt-16 section-estacionamento">
             <form class="formulario needs-validation" action="/" method="POST" novalidate>
