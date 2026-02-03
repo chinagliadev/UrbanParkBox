@@ -43,21 +43,27 @@ app.get('/', async (req, res) => {
       INNER JOIN vagas ON estacionamento.vaga_id = vagas.id
       WHERE veiculos.status = 'ativo';`
 
-    const SQLCONTAGEMVAGASDISPONIVEIS = `SELECT COUNT(*) AS total FROM vagas WHERE status = 'disponivel'
-`   
+    const SQLCONTAGEMVAGASDISPONIVEIS = `SELECT COUNT(*) AS total FROM vagas WHERE status = 'disponivel'`   
 
     const SQLCONTAGEMVAGASOCUPADAS = `SELECT COUNT(*) AS totalOcupadas FROM vagas WHERE status = 'ocupado'`
+
+    const SQLCONTAGEMCARROS = `SELECT COUNT(*) AS totalCarros FROM veiculos WHERE tipo = 'carro' AND status = 'ativo'`
+    const SQLCONTAGEMMOTO = `SELECT COUNT(*) AS totalMotos FROM veiculos WHERE tipo = 'moto' AND status = 'ativo'`
 
     const [vagas] = await conexao.query(SQLVAGASDISPONIVEIS);
     const [veiculos_estacionados] = await conexao.query(SQLLISTARVEICULOS)
     const [resultado] = await conexao.query(SQLCONTAGEMVAGASDISPONIVEIS)
     const [resultadoOcupadas] = await conexao.query(SQLCONTAGEMVAGASOCUPADAS)
+    const [resultadoQuantidadeCarros] = await conexao.query(SQLCONTAGEMCARROS)
+    const [resultadoQuantidadeMotos] = await conexao.query(SQLCONTAGEMMOTO)
 
     res.render('home', {
       vagas,
       veiculos_estacionados,
       vaga_disponiveis: resultado[0].total,
       vagas_ocupadas: resultadoOcupadas[0].totalOcupadas,
+      carro: resultadoQuantidadeCarros[0].totalCarros,
+      moto:resultadoQuantidadeMotos[0].totalMotos,
       sucesso: req.query.sucesso === '1',
       erro: null
     });
@@ -81,22 +87,16 @@ app.post('/', async (req, res) => {
   }
 
   const SQLVEICULO = `
-    INSERT INTO veiculos (tipo, placa, modelo, cor, status)
-    VALUES (?, ?, ?, ?, ?)
-  `;
+    INSERT INTO veiculos (tipo, placa, modelo, cor, status) VALUES (?, ?, ?, ?, ?)`;
 
   const SQLVAGAALEATORIA = `
-    SELECT id FROM vagas WHERE status = 'disponivel' LIMIT 1
-  `;
+    SELECT id FROM vagas WHERE status = 'disponivel' LIMIT 1`;
 
   const SQLUPDATEVAGA = `
-    UPDATE vagas SET status = 'ocupado' WHERE id = ?
-  `;
+    UPDATE vagas SET status = 'ocupado' WHERE id = ?`;
 
   const SQLESTACIONAMENTO = `
-    INSERT INTO estacionamento (veiculo_id, vaga_id)
-    VALUES (?, ?)
-  `;
+    INSERT INTO estacionamento (veiculo_id, vaga_id) VALUES (?, ?)`;
 
   try {
     let vagaId = vaga_disponivel;
