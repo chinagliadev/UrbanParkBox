@@ -5,4 +5,13 @@ const EstacionamentoController = require('../controller/EstacionamentoController
 
 router.get('/', EstacionamentoController.home)
 
+router.post('/registrarEntrada', async (req, res) => {
+  try {
+    await EstacionamentoController.registrarEntrada(req, res)
+  } catch (error) {
+    console.error(error)
+    res.redirect('/?erro=1')
+  }
+})
+
 module.exports = router

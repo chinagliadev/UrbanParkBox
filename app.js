@@ -11,6 +11,10 @@ app.engine('handlebars', engine({
   }
 }));
 
+app.use(express.urlencoded({ extended: true }));
+
+app.use(express.json());
+
 app.set('view engine', 'handlebars')
 app.set('views', './views')
 

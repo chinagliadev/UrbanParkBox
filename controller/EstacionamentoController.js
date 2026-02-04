@@ -44,7 +44,36 @@ const EstacionamentoController = {
         erro: 'Erro ao carregar as vagas. Tente novamente mais tarde.'
       });
     }
+  },
+
+  async registrarEntrada(req, res) {
+  try {
+    let { vaga_disponivel, tipo, placa, modelo, cor } = req.body;
+
+    if (!vaga_disponivel) {
+      const proximaVaga = await VagasModel.buscarVagasProxima();
+      
+      vaga_disponivel = proximaVaga.id; 
+    }
+
+    await VagasModel.atualizarStatusVaga(vaga_disponivel);
+
+    await VeiculosModel.registrarEntrada({
+      vaga_id: vaga_disponivel,
+      placa,
+      tipo,
+      status: 'ativo',
+      entrada: new Date()
+    });
+
+    res.redirect('/?sucesso=1');
+  } catch (error) {
+    console.error(error);
+    res.redirect('/?erro=1');
   }
+}
+
+
 };
 
 module.exports = EstacionamentoController;

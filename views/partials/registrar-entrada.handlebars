@@ -1,5 +1,5 @@
 <section class="registrar-entrada  mt-16 section-estacionamento">
-    <form class="formulario needs-validation" action="/" method="POST" novalidate>
+    <form class="formulario needs-validation" action="/registrarEntrada" method="POST" novalidate>
         <div class="caixa-titulo">
             <h4 class="titulo-formulario header-4">Registrar Entrada</h4>
             <p class="subtitulo-formulario">Gerenciamento da entrada de veículos</p>
@@ -19,9 +19,7 @@
         </div>
 
 
-
         <div class="row mt-16">
-
             <div class="col-md-6 d-flex flex-column gap-2">
                 <label for="vagas_disponiveis_agora">Vaga</label>
                 {{#if vagas.length}}
