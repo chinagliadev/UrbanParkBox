@@ -1,0 +1,80 @@
+<section class="registrar-entrada  mt-16 section-estacionamento">
+    <form class="formulario needs-validation" action="/" method="POST" novalidate>
+        <div class="caixa-titulo">
+            <h4 class="titulo-formulario header-4">Registrar Entrada</h4>
+            <p class="subtitulo-formulario">Gerenciamento da entrada de veículos</p>
+        </div>
+
+        <div class="form-check">
+            <input type="radio" class="form-check-input" id="txtCarro" name="tipo_veiculo" value="carro" required>
+            <label class="form-check-label" for="txtCarro">Carro</label>
+        </div>
+
+        <div class="form-check mb-3">
+            <input type="radio" class="form-check-input" id="txtMoto" name="tipo_veiculo" value="moto">
+            <label class="form-check-label" for="txtMoto">Moto</label>
+            <div class="invalid-feedback">
+                Selecione um tipo de veículo
+            </div>
+        </div>
+
+
+
+        <div class="row mt-16">
+
+            <div class="col-md-6 d-flex flex-column gap-2">
+                <label for="vagas_disponiveis_agora">Vaga</label>
+                {{#if vagas.length}}
+
+                <select class="input-formulario" name="vaga_disponivel" id="vagas_disponiveis_agora">
+                    <option value="" disabled selected>
+                        Selecione a vaga (Opcional)
+                    </option>
+
+                    {{#each vagas}}
+                    <option value="{{id}}">
+                        Vaga {{numero}}
+                    </option>
+                    {{/each}}
+                </select>
+                {{else}}
+                <p>Nenhuma vaga disponível</p>
+                {{/if}}
+            </div>
+
+            <div class="col-md-6 d-flex flex-column gap-2">
+                <label for="txtPlaca">Placa</label>
+                <input class="form-control input-formulario" type="text" name="placa" placeholder="ABC-1234" required
+                    pattern="[A-Z]{3}-[0-9]{4}">
+                <div class="invalid-feedback">
+                    Informe a placa corretamente
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-16 d-flex flex-column gap-2">
+            <label for="txtModelo">Modelo</label>
+            <input class="form-control input-formulario" type="text" name="modelo" id="txtModelo"
+                placeholder="Ex: Honda Civic" required>
+            <div class="invalid-feedback">
+                Escolha o modelo para o veiculo
+            </div>
+        </div>
+
+        <div class="mt-16 d-flex flex-column gap-2">
+            <label for="txtCor">Cor</label>
+            <input class="form-control input-formulario" type="text" name="cor" id="txtCor" placeholder="Ex: Preto"
+                required>
+            <div class="invalid-feedback">
+                Escolha a cor para o veiculo
+            </div>
+        </div>
+
+        <div class="mt-16">
+            <button type="submit" class="btn-registrar-entrada">
+                Registrar Entrada
+            </button>
+        </div>
+    </form>
+</section>
