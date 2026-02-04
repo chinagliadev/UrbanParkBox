@@ -4,7 +4,7 @@ const veiculos = {
 
     getCountVeiculosByType: async (type) => {
         try {
-            const sql = `SELECT COUNT(*) AS totalVeiculos FROM veiculos WHERE tipo = ? AND status = 'ativo'`
+            const sql = `SELECT tipo, COUNT(*) AS totalVeiculos FROM veiculos WHERE status = 'ativo' GROUP BY tipo`
             const [rows] = await conexao.query(sql, [type])
             return rows[0].totalVeiculos
         } catch (error) {
@@ -15,5 +15,3 @@ const veiculos = {
 }
 
 module.exports = veiculos
-
- 
