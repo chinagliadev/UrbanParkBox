@@ -1,17 +1,17 @@
-app.engine('handlebars', engine({
-  defaultLayout: 'main',
-  partialsDir: './views/partials',
-  helpers: {
-    eq: (a, b) => a === b
-  }
-}));
-
-
-const { engine } = require('express-handlebars')
-
-app.set('view engine', 'handlebars')
-app.set('views', './views')
-
-app.use('/bootstrap', express.static('./node_modules/bootstrap/dist'))
-app.use(express.static('public'))
-
+INSERT INTO vagas (numero, setor, status) VALUES
+(1, 'A', 'disponivel'),
+(2, 'A', 'disponivel'),
+(3, 'A', 'disponivel'),
+(4, 'A', 'disponivel'),
+(5, 'B', 'disponivel'),
+(6, 'B', 'disponivel'),
+(7, 'B', 'disponivel'),
+(8, 'B', 'disponivel'),
+(9, 'C', 'disponivel'),
+(10, 'C', 'disponivel'),
+(11, 'C', 'disponivel'),
+(12, 'C', 'disponivel'),
+(13, 'D', 'disponivel'),
+(14, 'D', 'disponivel'),
+(15, 'D', 'disponivel'),
+(16, 'D', 'disponivel');

@@ -1,12 +1,17 @@
 const VagasModel = require('../model/VagasModel');
 const VeiculosModel = require('../model/VeiculosModel');
+const EstacionamentoModel = require('../model/EstacionamentoModel'); // Novo model para a tabela estacionamento
 
 const EstacionamentoController = {
+
   async home(req, res) {
     try {
       const vagasDisponiveis = await VagasModel.listarPorStatus('disponivel');
       const vagasLista = await VagasModel.listarTodas();
       const veiculosAtivos = await VeiculosModel.listarAtivos();
+      const veiculos_estacionados = await VeiculosModel.veiculosEstacionados();
+
+      console.log(veiculos_estacionados);
 
       const setores = {};
       vagasLista.forEach(vaga => {
@@ -22,7 +27,8 @@ const EstacionamentoController = {
       return res.render('home', {
         vagas: vagasDisponiveis,
         setores,
-        veiculos_estacionados: veiculosAtivos,
+        veiculosAtivos,
+        veiculos_estacionados,
         vaga_disponiveis: totalDisponiveis,
         vagas_ocupadas: totalOcupadas,
         carro: totalCarros,
@@ -47,32 +53,36 @@ const EstacionamentoController = {
   },
 
   async registrarEntrada(req, res) {
-  try {
-    let { vaga_disponivel, tipo, placa, modelo, cor } = req.body;
+    try {
+      let { vaga_disponivel, tipo_veiculo, placa, modelo, cor } = req.body;
 
-    if (!vaga_disponivel) {
-      const proximaVaga = await VagasModel.buscarVagasProxima();
-      
-      vaga_disponivel = proximaVaga.id; 
+      if (!vaga_disponivel) {
+        const proximaVaga = await VagasModel.buscarVagasProxima();
+        vaga_disponivel = proximaVaga.id;
+      }
+
+      const veiculo = await VeiculosModel.registrarEntrada({
+        tipo_veiculo,
+        placa,
+        modelo,
+        cor,
+        status: 'ativo'
+      });
+
+      await EstacionamentoModel.registrarEntrada({
+        veiculo_id: veiculo.insertId,
+        vaga_id: vaga_disponivel,
+        entrada: new Date()
+      });
+
+      await VagasModel.atualizarStatusVaga(vaga_disponivel);
+
+      res.redirect('/?sucesso=1');
+    } catch (error) {
+      console.error(error);
+      res.redirect('/?erro=1');
     }
-
-    await VagasModel.atualizarStatusVaga(vaga_disponivel);
-
-    await VeiculosModel.registrarEntrada({
-      vaga_id: vaga_disponivel,
-      placa,
-      tipo,
-      status: 'ativo',
-      entrada: new Date()
-    });
-
-    res.redirect('/?sucesso=1');
-  } catch (error) {
-    console.error(error);
-    res.redirect('/?erro=1');
   }
-}
-
 
 };
 
