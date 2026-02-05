@@ -85,11 +85,11 @@ function calcularCobrancaPorTempo(totalMinutos) {
   return valor.toFixed(2);
 }
 
-const mensagem_alerta = document.getElementById('alert_mensagem')
-
 esconderAlerta('alert_mensagem');
+esconderAlerta('alert_mensagem_liberado');
 
-function esconderAlerta(id, tempo = 5000) {
+
+function esconderAlerta(id, tempo = 3000) {
   const alerta = document.getElementById(id);
 
   if (!alerta) return;
@@ -112,6 +112,7 @@ if (tempo && entrada) {
     const tempoEmMinuto = calcularTempoEmMinutos(tempoEstacionado);
     const tempoFormatado = formatarTempo(tempoEmMinuto);
 
+    console.log(tempoFormatado)
     tempo.textContent = tempoFormatado;
   }
 

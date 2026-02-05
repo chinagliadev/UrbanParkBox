@@ -1,4 +1,47 @@
-<section class="section-estacionamento">
-    <h1>Historico</h1>
-    <div class="alert alert-warning">Gerenciar Historico</div>
+<section class="section-estacionamento mb-5 veiculos_ativos mt-16">
+
+        <header class="cabecalho_veiculos_ativos w-100 d-flex align-items-center justify-content-between">
+            <h3 class="titulo-veiculos-ativos">Historico Estacionametno</h3>
+        </header>
+
+
+        <div class="veiculos_momentos">
+            <ul class="lista_veiculos_ativos">
+                {{#each historicoVeiculosEstacionados}}
+
+
+                <li class="li-ativo mt-16">
+                    <div class="item_ativo">
+                        <div class="header-item">
+                            <h3>
+                                {{#if (eq tipo "moto")}}
+                                <img src="/img/icone_moto.png" alt="icone para o titulo de carro ativo"
+                                    class="me-2">{{placa}}
+                                {{else}}
+                                <img src="/img/Icone_carro_ativo.png" alt="icone para o titulo de carro ativo"
+                                    class="me-2">{{placa}}
+                                {{/if}}
+                            </h3>
+
+                        </div>
+                        <div class="descricao_carro">
+                            <ul class="lista_descricao_carro">
+                                <li>Modelo: <span>{{modelo}}</span></li>
+                                <li>Cor: <span>{{cor}}</span></li>
+                                <li>Vaga: <span>{{numero}}</span></li>
+                                <li>Entrada: <span id="entrada">{{entrada}}</span></li>
+                                <li>Saida: <span>{{saida}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+
+                {{else}}
+                <li class="list-unstyled text-center">
+                    <img width="330" class="img-fluid" src="/img/Parking-bro.png" alt="Estacionamento">
+                    <p class="fs-4">O estacionamento está vazio. Que tal registrar a primeira entrada?</p>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
 </section>

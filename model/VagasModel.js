@@ -1,37 +1,33 @@
 const conexao = require('../config/bancoDeDados');
 
-const VagaModel = {
+const VagasModel = {
+  async listarTodas() {
+    const [rows] = await conexao.query('SELECT * FROM vagas');
+    return rows;
+  },
 
-    getAllVagas: async () => {
-        try {
-            const sql = 'SELECT * FROM vagas';
-            const [rows] = await conexao.query(sql);
-            return rows;
-        } catch (error) {
-            throw error;
-        }
-    },
+  async listarPorStatus(status) {
+    const [rows] = await conexao.query('SELECT * FROM vagas WHERE status = ?', [status]);
+    return rows;
+  },
 
-    getAllVagasStatus: async (status) => {
-        try {
-            const sql = 'SELECT * FROM vagas WHERE status = ?';
-            const [rows] = await conexao.query(sql, [status]);
-            return rows;
-        } catch (error) {
-            throw error;
-        }
-    },
+  async contarPorStatus(status) {
+    const [rows] = await conexao.query('SELECT COUNT(*) AS total FROM vagas WHERE status = ?', [status]);
+    return rows[0].total;
+  },
 
-    getCountVagasByStatus: async (status) => {
-        try {
-            const sql = 'SELECT COUNT(*) AS totalVagas FROM vagas WHERE status = ?'
-            const [rows] = await conexao.query(sql, [status])
-            return rows[0].totalVagas
-        } catch (error) {
-            throw error;
-        }
-    }
+  atualizarStatusVaga: async (id, status) => {
+    const sql = 'UPDATE vagas SET status = ? WHERE id = ?';
+    const [result] = await conexao.query(sql, [status, id]);
+    return result;
+  },
+
+  buscarVagasProxima: async () =>{
+    const [rows] = await conexao.query('SELECT * FROM vagas LIMIT 1');
+    return rows[0];
+  },
+
 
 };
 
-module.exports = VagaModel;
+module.exports = VagasModel;
