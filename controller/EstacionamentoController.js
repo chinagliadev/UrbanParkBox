@@ -10,6 +10,7 @@ const EstacionamentoController = {
       const vagasLista = await VagasModel.listarTodas();
       const veiculosAtivos = await VeiculosModel.listarAtivos();
       const veiculos_estacionados = await VeiculosModel.veiculosEstacionados();
+      const historicoVeiculosEstacionados = await VeiculosModel.historicoVeiculosEstacionados();
 
       console.log(veiculos_estacionados);
 
@@ -29,6 +30,7 @@ const EstacionamentoController = {
         setores,
         veiculosAtivos,
         veiculos_estacionados,
+        historicoVeiculosEstacionados,
         vaga_disponiveis: totalDisponiveis,
         vagas_ocupadas: totalOcupadas,
         carro: totalCarros,
