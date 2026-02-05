@@ -42,8 +42,8 @@
 
             <div class="col-md-6 d-flex flex-column gap-2">
                 <label for="txtPlaca">Placa</label>
-                <input class="form-control input-formulario" type="text" name="placa" placeholder="ABC-1234" required
-                    pattern="[A-Z]{3}-[0-9]{4}">
+                <input id="txtPlaca" class="form-control input-formulario" type="text" name="placa"
+                    placeholder="ABC-1234" required pattern="^([A-Za-z]{3}[0-9]{4}|[A-Za-z]{3}[0-9][A-Za-z][0-9]{2})$">
                 <div class="invalid-feedback">
                     Informe a placa corretamente
                 </div>

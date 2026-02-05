@@ -38,15 +38,15 @@ const VeiculosModel = {
     }
 
   },
-  
+
   historicoVeiculosEstacionados: async () => {
-    const sql = `
-    SELECT 
+    const sql = `SELECT 
       estacionamento.id AS estacionamento_id,
       vagas.id AS vaga_id,
       veiculos.id AS veiculo_id,
       veiculos.status AS veiculos_status,
       DATE_FORMAT(estacionamento.entrada, '%d/%m/%Y %H:%i') AS entrada,
+      DATE_FORMAT(estacionamento.saida, '%d/%m/%Y %H:%i') AS saida,
       veiculos.modelo,
       veiculos.placa,
       veiculos.cor,
@@ -56,8 +56,8 @@ const VeiculosModel = {
     FROM estacionamento
     INNER JOIN veiculos ON estacionamento.veiculo_id = veiculos.id
     INNER JOIN vagas ON estacionamento.vaga_id = vagas.id
-    WHERE veiculos.status <> 'ativo'
-  `
+    WHERE veiculos.status <> 'ativo'`
+  
     const [rows] = await conexao.query(sql)
     return rows
   }
@@ -88,8 +88,18 @@ const VeiculosModel = {
     ]);
 
     return result;
-  }
+  },
 
+  atualizarStatusVeiculo: async (id) => {
+    const sql = `
+    UPDATE veiculos 
+    SET status = ?, data_saida = NOW() 
+    WHERE id = ?
+  `
+    const [result] = await conexao.query(sql, ['finalizado', id])
+    return result
+  }
+  
 };
 
 module.exports = VeiculosModel;

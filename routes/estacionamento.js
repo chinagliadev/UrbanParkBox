@@ -16,7 +16,7 @@ router.post('/registrarEntrada', async (req, res) => {
 
 router.post('/liberar_veiculo', async(req, res)=>{
   try {
-    
+    await EstacionamentoController.liberar_veiculo(req, res)
   } catch (error) {
     console.log(error)
     res.redirect('/?erro=1')

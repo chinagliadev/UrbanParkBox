@@ -1,4 +1,4 @@
-<section class="section-estacionamento veiculos_ativos mt-16">
+<section class="section-estacionamento mb-5 veiculos_ativos mt-16">
 
         <header class="cabecalho_veiculos_ativos w-100 d-flex align-items-center justify-content-between">
             <h3 class="titulo-veiculos-ativos">Historico Estacionametno</h3>
@@ -23,18 +23,6 @@
                                 {{/if}}
                             </h3>
 
-                            <div class="grupo_acoes">
-                                <button data-bs-toggle="modal" data-bs-target="#modal-liberar-veiculo"
-                                    data-id="{{this.estacionamento_id}}" data-idVaga="{{this.vaga_id}}"
-                                    data-idVeiculo="{{this.veiculo_id}}" data-modelo="{{modelo}}" data-cor="{{cor}}"
-                                    data-vaga="{{numero}}" data-entrada="{{entrada}}" data-tempo="{{tempo}}"
-                                    class="ticket_veiculo btn_liberar_veiculo"><img src="/img/icone-car-liberar.png"
-                                        alt="icone para liberar o carro">
-                                </button>
-                                <button class="ticket_veiculo btn_ver_ticket"><img src="/img/Ticket.png"
-                                        alt="icone ticket para o botao"></button>
-                            </div>
-
                         </div>
                         <div class="descricao_carro">
                             <ul class="lista_descricao_carro">
@@ -42,7 +30,7 @@
                                 <li>Cor: <span>{{cor}}</span></li>
                                 <li>Vaga: <span>{{numero}}</span></li>
                                 <li>Entrada: <span id="entrada">{{entrada}}</span></li>
-                                <li>Tempo: <span id="tempo">0 Min</span></li>
+                                <li>Saida: <span>{{saida}}</span></li>
                             </ul>
                         </div>
                     </div>

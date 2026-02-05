@@ -34,7 +34,7 @@ const EstacionamentoController = {
         vagas_ocupadas: totalOcupadas,
         carro: totalCarros,
         moto: totalMotos,
-        sucesso: req.query.sucesso === '1',
+        sucesso: req.query.sucesso || null,
         erro: null
       });
     } catch (error) {
@@ -89,16 +89,22 @@ const EstacionamentoController = {
     try {
       const { veiculo_id, vaga_id, estacionamento_id } = req.body
 
-      if (!veiculo_id || !vaga_id || estacionamento_id) { throw error }
+      if (!veiculo_id || !vaga_id || !estacionamento_id) {
+        throw new Error('Dados obrigatórios não informados')
+      }
 
-      EstacionamentoModel.atualizarSaidaEstacionamento(estacionamento_id)
+      await VeiculosModel.atualizarStatusVeiculo(veiculo_id)
+      await EstacionamentoModel.atualizarSaidaEstacionamento(estacionamento_id)
       await VagasModel.atualizarStatusVaga(vaga_id, 'disponivel')
 
+      res.redirect('/?sucesso=2')
+
     } catch (error) {
-      console.error(error);
-      res.redirect('/?erro=1');
+      console.error(error)
+      res.redirect('/?erro=1')
     }
   }
+
 
 };
 

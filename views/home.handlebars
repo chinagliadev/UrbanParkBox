@@ -1,15 +1,23 @@
-<main class="vh-100">
+<main>
     <div class="container">
 
         {{> dashboards-status}}
 
         {{> menu}}
 
-        {{#if sucesso}}
+        {{#if (eq sucesso '1')}}
         <div id="alert_mensagem" class="alert alert-success mt-3">
             Veículo cadastrado com sucesso
         </div>
         {{/if}}
+
+        {{#if (eq sucesso '2')}}
+        <div id="alert_mensagem_liberado" class="alert alert-success mt-3">
+            Veículo liberado com sucesso
+        </div>
+        {{/if}}
+
+
 
 
         {{> veiculos-estacionados}}
