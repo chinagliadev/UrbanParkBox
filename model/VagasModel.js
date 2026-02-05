@@ -16,16 +16,17 @@ const VagasModel = {
     return rows[0].total;
   },
 
-  atualizarStatusVaga: async (id) => {
+  atualizarStatusVaga: async (id, status) => {
     const sql = 'UPDATE vagas SET status = ? WHERE id = ?';
-    const [result] = await conexao.query(sql, ['ocupado', id]);
+    const [result] = await conexao.query(sql, [status, id]);
     return result;
   },
 
   buscarVagasProxima: async () =>{
     const [rows] = await conexao.query('SELECT * FROM vagas LIMIT 1');
     return rows[0];
-  }
+  },
+
 
 };
 

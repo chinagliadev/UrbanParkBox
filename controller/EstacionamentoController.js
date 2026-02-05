@@ -12,7 +12,6 @@ const EstacionamentoController = {
       const veiculos_estacionados = await VeiculosModel.veiculosEstacionados();
       const historicoVeiculosEstacionados = await VeiculosModel.historicoVeiculosEstacionados();
 
-      console.log(veiculos_estacionados);
 
       const setores = {};
       vagasLista.forEach(vaga => {
@@ -77,9 +76,24 @@ const EstacionamentoController = {
         entrada: new Date()
       });
 
-      await VagasModel.atualizarStatusVaga(vaga_disponivel);
+      await VagasModel.atualizarStatusVaga(vaga_disponivel, 'ocupado');
 
       res.redirect('/?sucesso=1');
+    } catch (error) {
+      console.error(error);
+      res.redirect('/?erro=1');
+    }
+  },
+
+  async liberar_veiculo(req, res) {
+    try {
+      const { veiculo_id, vaga_id, estacionamento_id } = req.body
+
+      if (!veiculo_id || !vaga_id || estacionamento_id) { throw error }
+
+      EstacionamentoModel.atualizarSaidaEstacionamento(estacionamento_id)
+      await VagasModel.atualizarStatusVaga(vaga_id, 'disponivel')
+
     } catch (error) {
       console.error(error);
       res.redirect('/?erro=1');

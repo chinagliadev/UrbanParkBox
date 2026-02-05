@@ -14,4 +14,13 @@ router.post('/registrarEntrada', async (req, res) => {
   }
 })
 
+router.post('/liberar_veiculo', async(req, res)=>{
+  try {
+    
+  } catch (error) {
+    console.log(error)
+    res.redirect('/?erro=1')
+  }
+})
+
 module.exports = router

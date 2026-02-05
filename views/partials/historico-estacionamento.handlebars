@@ -1,4 +1,59 @@
-<section class="section-estacionamento">
-    <h1>Historico</h1>
-    <div class="alert alert-warning">Gerenciar Historico</div>
+<section class="section-estacionamento veiculos_ativos mt-16">
+
+        <header class="cabecalho_veiculos_ativos w-100 d-flex align-items-center justify-content-between">
+            <h3 class="titulo-veiculos-ativos">Historico Estacionametno</h3>
+        </header>
+
+
+        <div class="veiculos_momentos">
+            <ul class="lista_veiculos_ativos">
+                {{#each historicoVeiculosEstacionados}}
+
+
+                <li class="li-ativo mt-16">
+                    <div class="item_ativo">
+                        <div class="header-item">
+                            <h3>
+                                {{#if (eq tipo "moto")}}
+                                <img src="/img/icone_moto.png" alt="icone para o titulo de carro ativo"
+                                    class="me-2">{{placa}}
+                                {{else}}
+                                <img src="/img/Icone_carro_ativo.png" alt="icone para o titulo de carro ativo"
+                                    class="me-2">{{placa}}
+                                {{/if}}
+                            </h3>
+
+                            <div class="grupo_acoes">
+                                <button data-bs-toggle="modal" data-bs-target="#modal-liberar-veiculo"
+                                    data-id="{{this.estacionamento_id}}" data-idVaga="{{this.vaga_id}}"
+                                    data-idVeiculo="{{this.veiculo_id}}" data-modelo="{{modelo}}" data-cor="{{cor}}"
+                                    data-vaga="{{numero}}" data-entrada="{{entrada}}" data-tempo="{{tempo}}"
+                                    class="ticket_veiculo btn_liberar_veiculo"><img src="/img/icone-car-liberar.png"
+                                        alt="icone para liberar o carro">
+                                </button>
+                                <button class="ticket_veiculo btn_ver_ticket"><img src="/img/Ticket.png"
+                                        alt="icone ticket para o botao"></button>
+                            </div>
+
+                        </div>
+                        <div class="descricao_carro">
+                            <ul class="lista_descricao_carro">
+                                <li>Modelo: <span>{{modelo}}</span></li>
+                                <li>Cor: <span>{{cor}}</span></li>
+                                <li>Vaga: <span>{{numero}}</span></li>
+                                <li>Entrada: <span id="entrada">{{entrada}}</span></li>
+                                <li>Tempo: <span id="tempo">0 Min</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+
+                {{else}}
+                <li class="list-unstyled text-center">
+                    <img width="330" class="img-fluid" src="/img/Parking-bro.png" alt="Estacionamento">
+                    <p class="fs-4">O estacionamento está vazio. Que tal registrar a primeira entrada?</p>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
 </section>

@@ -38,9 +38,10 @@ const VeiculosModel = {
     }
 
   },
+  
   historicoVeiculosEstacionados: async () => {
-    try {
-      const sql = `SELECT 
+    const sql = `
+    SELECT 
       estacionamento.id AS estacionamento_id,
       vagas.id AS vaga_id,
       veiculos.id AS veiculo_id,
@@ -52,15 +53,13 @@ const VeiculosModel = {
       veiculos.tipo,
       vagas.numero,
       vagas.setor
-      FROM estacionamento
-      INNER JOIN veiculos ON estacionamento.veiculo_id = veiculos.id
-      INNER JOIN vagas ON estacionamento.vaga_id = vagas.id`
-
-      const [rows] = await conexao.query(sql)
-      return rows
-    } catch (error) {
-      throw error
-    }
+    FROM estacionamento
+    INNER JOIN veiculos ON estacionamento.veiculo_id = veiculos.id
+    INNER JOIN vagas ON estacionamento.vaga_id = vagas.id
+    WHERE veiculos.status <> 'ativo'
+  `
+    const [rows] = await conexao.query(sql)
+    return rows
   }
   ,
 
