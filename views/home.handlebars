@@ -17,8 +17,11 @@
         </div>
         {{/if}}
 
-
-
+        {{#if (eq erro 'placa_existente')}}
+        <div id="alert_mensagem_veiculo_registrado" class="alert alert-warning mt-3">
+            Placa de veiculo já registrado
+        </div>
+        {{/if}}
 
         {{> veiculos-estacionados}}
 

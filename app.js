@@ -19,6 +19,10 @@ app.set('view engine', 'handlebars')
 app.set('views', './views')
 
 app.use('/bootstrap', express.static('./node_modules/bootstrap/dist'))
+app.use(
+  '/bootstrap-icons',
+  express.static('node_modules/bootstrap-icons/font')
+)
 app.use(express.static('public'))
 
 app.use('/', estacionamentoRouter);

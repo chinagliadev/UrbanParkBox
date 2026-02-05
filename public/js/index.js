@@ -87,6 +87,7 @@ function calcularCobrancaPorTempo(totalMinutos) {
 
 esconderAlerta('alert_mensagem');
 esconderAlerta('alert_mensagem_liberado');
+esconderAlerta('alert_mensagem_veiculo_registrado');
 
 
 function esconderAlerta(id, tempo = 3000) {

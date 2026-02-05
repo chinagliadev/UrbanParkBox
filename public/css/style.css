@@ -418,3 +418,13 @@ input[type="radio"] {
     padding: 0;
     list-style: none;
 }
+
+.btn-filtrar-historico{
+    background-color: #1f1e24;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    transition: 0.2s;
+    padding: 8px;
+    width: 60px;
+}

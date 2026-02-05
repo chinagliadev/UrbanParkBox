@@ -14,7 +14,7 @@ router.post('/registrarEntrada', async (req, res) => {
   }
 })
 
-router.post('/liberar_veiculo', async(req, res)=>{
+router.post('/liberar_veiculo', async (req, res) => {
   try {
     await EstacionamentoController.liberar_veiculo(req, res)
   } catch (error) {
@@ -22,5 +22,13 @@ router.post('/liberar_veiculo', async(req, res)=>{
     res.redirect('/?erro=1')
   }
 })
+
+router.post('/historico', async (req, res) => {
+  try {
+    await EstacionamentoController.pesquisar_historico(req, res);
+  } catch (error) {
+    res.status(500).json({ erro: 'Erro inesperado ao buscar histórico' });
+  }
+});
 
 module.exports = router

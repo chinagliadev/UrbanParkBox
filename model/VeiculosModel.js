@@ -57,7 +57,7 @@ const VeiculosModel = {
     INNER JOIN veiculos ON estacionamento.veiculo_id = veiculos.id
     INNER JOIN vagas ON estacionamento.vaga_id = vagas.id
     WHERE veiculos.status <> 'ativo'`
-  
+
     const [rows] = await conexao.query(sql)
     return rows
   }
@@ -98,8 +98,14 @@ const VeiculosModel = {
   `
     const [result] = await conexao.query(sql, ['finalizado', id])
     return result
+  },
+
+  placaExiste: async (placa) => {
+    const sql = 'SELECT 1 FROM veiculos WHERE placa = ? LIMIT 1'
+    const [rows] = await conexao.query(sql, [placa])
+    return rows.length > 0
   }
-  
+
 };
 
 module.exports = VeiculosModel;

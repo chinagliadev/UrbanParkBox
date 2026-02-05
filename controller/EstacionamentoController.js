@@ -1,6 +1,7 @@
 const VagasModel = require('../model/VagasModel');
 const VeiculosModel = require('../model/VeiculosModel');
 const EstacionamentoModel = require('../model/EstacionamentoModel'); // Novo model para a tabela estacionamento
+const conexao = require('../config/bancoDeDados');
 
 const EstacionamentoController = {
 
@@ -35,7 +36,7 @@ const EstacionamentoController = {
         carro: totalCarros,
         moto: totalMotos,
         sucesso: req.query.sucesso || null,
-        erro: null
+        erro: req.query.erro || null
       });
     } catch (error) {
       console.error(error);
@@ -56,6 +57,14 @@ const EstacionamentoController = {
   async registrarEntrada(req, res) {
     try {
       let { vaga_disponivel, tipo_veiculo, placa, modelo, cor } = req.body;
+
+      if (!placa) {
+        return res.status(400).json({ erro: 'Placa é obrigatória' })
+      }
+
+      if (await VeiculosModel.placaExiste(placa)) {
+        return res.redirect('/?erro=placa_existente');
+      }
 
       if (!vaga_disponivel) {
         const proximaVaga = await VagasModel.buscarVagasProxima();
@@ -103,9 +112,30 @@ const EstacionamentoController = {
       console.error(error)
       res.redirect('/?erro=1')
     }
+  },
+
+  async pesquisar_historico(req, res) {
+    try {
+      const { placa_veiculo } = req.body;
+
+      if (!placa_veiculo) {
+        return res.status(400).json({ erro: 'Placa não informada' });
+      }
+
+      const historicoPesquisa = await EstacionamentoModel.buscarPlacaHistorico(placa_veiculo);
+
+      if (historicoPesquisa.length === 0) {
+        return res.status(404).json({ erro: 'Nenhum registro encontrado', historico: [] });
+      }
+
+      res.json({ historico: historicoPesquisa });
+
+    } catch (error) {
+      console.error('Erro ao pesquisar histórico:', error);
+      res.status(500).json({ erro: 'Ocorreu um erro ao buscar o histórico' });
+    }
   }
-
-
+  
 };
 
 module.exports = EstacionamentoController;
